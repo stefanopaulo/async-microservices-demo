@@ -50,7 +50,7 @@ O projeto utiliza o serviço **gratuito CloudAMQP (LavinMQ)**, eliminando a nece
 
 ### 1️⃣ Configuração do Message Broker
 
-No arquivo `application.properties` (ou `.yml`) de **ambos os microserviços**, substitua os valores abaixo pelas suas credenciais do CloudAMQP:
+No arquivo `application.properties` de **ambos os microserviços**, substitua os valores abaixo pelas suas credenciais do CloudAMQP:
 
 ```properties
 # ------------------------------------------------------------------
