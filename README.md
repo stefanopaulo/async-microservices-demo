@@ -44,7 +44,7 @@ Este projeto foi construído como peça de portfólio de arquitetura distribuíd
 
 ## 📸 Demonstração
 
-[screen-capture.webm](../../Downloads/screen-capture.webm)
+[screen-capture.webm](https://github.com/user-attachments/assets/1d1a25be-8833-4427-892f-63a718d984f3)
 
 ---
 
