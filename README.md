@@ -42,6 +42,12 @@ Este projeto foi construído como peça de portfólio de arquitetura distribuíd
 
 ---
 
+## 📸 Demonstração
+
+[screen-capture.webm](../../Downloads/screen-capture.webm)
+
+---
+
 ## 🧠 Arquitetura do Projeto
 
 **User Microservice**
@@ -84,10 +90,55 @@ docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.12-ma
 4. **Variáveis de Ambiente:**
 
 * Configure o application.properties de cada serviço com suas credenciais do banco, RabbitMQ e SMTP do Gmail.
+### 👤 **Microserviço de Usuário (Porta 8081)**
+```bash
+# Configurações do Servidor
+server.port=8081
+
+# Banco de Dados (PostgreSQL)
+spring.datasource.url=jdbc:postgresql://localhost:5432/user_db
+spring.datasource.username=seu_usuario
+spring.datasource.password=sua_senha
+spring.jpa.hibernate.ddl-auto=update
+
+# Mensageria - CloudAMQP (RabbitMQ)
+# Substitua os valores abaixo pelos dados da sua instância no CloudAMQP
+spring.rabbitmq.addresses=amqps://usuario_exemplo:senha_exemplo@host_exemplo.lmq.cloudamqp.com/vhost_exemplo
+
+# Definição da Fila
+broker.queue.email.name=default.email
+```
+### 📧 **Microserviço de E-mail (Porta 8082)**
+
+```bash
+# Configurações do Servidor
+server.port=8082
+
+# Banco de Dados (PostgreSQL)
+spring.datasource.url=jdbc:postgresql://localhost:5432/email_db
+spring.datasource.username=seu_usuario
+spring.datasource.password=sua_senha
+spring.jpa.hibernate.ddl-auto=update
+
+# Mensageria - CloudAMQP (RabbitMQ)
+spring.rabbitmq.addresses=amqps://usuario_exemplo:senha_exemplo@host_exemplo.lmq.cloudamqp.com/vhost_exemplo
+
+# Fila que este microserviço ficará escutando
+broker.queue.email.name=default.email
+
+# Configuração de Envio de E-mail (SMTP Gmail)
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=seu_email_aqui@gmail.com
+# Use a "Senha de App" gerada na sua conta Google
+spring.mail.password=sua_senha_de_app_gerada
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+```
 
 5. **Execução:**
 
-* Entre em cada pasta (user-ms e email-ms) e execute:
+* Entre em cada pasta (user e email) e execute:
 
 ```bash
 mvn spring-boot:run

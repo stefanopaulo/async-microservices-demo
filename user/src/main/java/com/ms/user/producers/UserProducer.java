@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserProducer {
-    private RabbitTemplate rabbitTemplate;
+    private final RabbitTemplate rabbitTemplate;
 
     public UserProducer(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;

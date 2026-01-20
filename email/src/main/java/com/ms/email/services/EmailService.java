@@ -29,7 +29,7 @@ public class EmailService {
     private String emailFrom;
 
     @Transactional
-    public EmailModel sendEmail(EmailModel emailModel) {
+    public void sendEmail(EmailModel emailModel) {
         try {
             emailModel.setSendDateEmail(LocalDateTime.now());
             emailModel.setEmailFrom(emailFrom);
@@ -41,7 +41,7 @@ public class EmailService {
             emailSender.send(message);
 
             emailModel.setStatusEmail(StatusEmail.SENT);
-            return emailRepository.save(emailModel);
+            emailRepository.save(emailModel);
         } catch (MailException e) {
             emailModel.setStatusEmail(StatusEmail.ERROR);
             log.error("Erro ao enviar email {}", e.getMessage());
@@ -49,6 +49,5 @@ public class EmailService {
             log.error("Erro inesperado ao salvar email {}", e.getMessage());
         }
 
-        return emailModel;
     }
 }
